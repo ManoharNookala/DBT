@@ -1,0 +1,26 @@
+name: 'DBT'
+version: '1.0.0'
+config-version: 2
+
+profile: 'DBT'  # This must match the profile name in profiles.yml
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+models:
+  DBT:
+    landing:
+      schema: "{{ env_var('LANDING_DATASET_NAME', 'default_landing') }}"
+      materialized: view
+
+    staging:
+      schema: "{{ env_var('STAGING_DATASET_NAME', 'default_staging') }}"
+      materialized: table
+
+    odp_final:
+      schema: "{{ env_var('ODP_DATASET_NAME', 'default_odp') }}"
+      materialized: incremental
