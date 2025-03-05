@@ -15,7 +15,7 @@ models:
   DBT:
     staging:
       schema: "staging"  # Ensure this is correct
-      materialized: table
+      materialized: incremental
 
     odp:
       schema: "odp"  # Ensure this is correct
