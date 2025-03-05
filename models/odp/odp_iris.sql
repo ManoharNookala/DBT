@@ -6,4 +6,4 @@
 
 
 SELECT DISTINCT *  
-FROM `learn-436612.staging.Iris`;
+FROM `learn-436612.staging.Iris`

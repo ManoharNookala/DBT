@@ -1,6 +1,9 @@
 name: DBT_for_Bigquery_Using_Github_Actions
 
 on:
+  push:
+    branches:
+      - main  # Change this if you're using a different branch
   schedule:
     - cron: '30 4 * * *'  # Runs every day at 9:30 IST [4:30 AM UST]
   workflow_dispatch:  # Allows manual triggering

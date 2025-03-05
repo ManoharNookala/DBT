@@ -15,11 +15,11 @@ models:
   DBT:
     landing:
       schema: "{{ env_var('LANDING_DATASET_NAME') }}"
-      materialized: view
+      materialized: incremental
 
     staging:
       schema: "{{ env_var('STAGING_DATASET_NAME') }}"
-      materialized: table
+      materialized: incremental
 
     odp_final:
       schema: "{{ env_var('ODP_DATASET_NAME') }}"
