@@ -1,3 +1,4 @@
+# Since landing is only used for reading, define it in models/schema.yml:
 version: 2
 
 sources:

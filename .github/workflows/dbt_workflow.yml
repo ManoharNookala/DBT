@@ -33,10 +33,10 @@ jobs:
         run: dbt debug --profiles-dir ./profile
 
       - name: Run dbt Models
-        run: dbt run --profiles-dir ./profile --target odp_final
+        run: dbt run --profiles-dir ./profile --target odp
 
       - name: Run dbt Tests
-        run: dbt test --profiles-dir ./profile --target odp_final
+        run: dbt test --profiles-dir ./profile --target odp
 
       - name: Clean Up
         run: rm -f /tmp/service_account.json
