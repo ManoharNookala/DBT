@@ -5,18 +5,14 @@ config-version: 2
 profile: 'DBT'  # This must match the profile name in profiles.yml
 
 model-paths: ["models"]
-seed-paths: ["seeds"]
-test-paths: ["tests"]
-analysis-paths: ["analyses"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
+# seed-paths: ["seeds"]
+# test-paths: ["tests"]
+# analysis-paths: ["analyses"]
+# macro-paths: ["macros"]
+# snapshot-paths: ["snapshots"]
 
 models:
   DBT:
-    landing:
-      schema: "landing"
-      materialized: view
-
     staging:
       schema: "staging"  # Ensure this is correct
       materialized: table
