@@ -13,10 +13,6 @@ model-paths: ["models"]
 
 models:
   DBT:
-    landing:
-      schema: "landing"
-      materialized: view
-
     staging:
       schema: "staging"  # ✅ Ensure this matches your BigQuery dataset
       materialized: incremental
