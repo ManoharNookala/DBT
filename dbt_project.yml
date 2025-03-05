@@ -14,13 +14,13 @@ snapshot-paths: ["snapshots"]
 models:
   DBT:
     landing:
-      schema: "{{ env_var('LANDING_DATASET_NAME', 'default_landing') }}"
+      schema: "{{ env_var('LANDING_DATASET_NAME') }}"
       materialized: view
 
     staging:
-      schema: "{{ env_var('STAGING_DATASET_NAME', 'default_staging') }}"
+      schema: "{{ env_var('STAGING_DATASET_NAME') }}"
       materialized: table
 
     odp_final:
-      schema: "{{ env_var('ODP_DATASET_NAME', 'default_odp') }}"
+      schema: "{{ env_var('ODP_DATASET_NAME') }}"
       materialized: incremental
