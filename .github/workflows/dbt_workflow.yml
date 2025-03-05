@@ -1,4 +1,4 @@
-name: dbt Pipeline for BigQuery
+name: DBT_for_Bigquery_Using_Github_Actions
 
 on:
   schedule:
