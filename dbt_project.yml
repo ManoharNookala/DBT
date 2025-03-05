@@ -13,12 +13,16 @@ model-paths: ["models"]
 
 models:
   DBT:
+    landing:
+      schema: "landing"
+      materialized: view
+
     staging:
-      schema: "staging"  # Ensure this is correct
+      schema: "staging"  # ✅ Ensure this matches your BigQuery dataset
       materialized: incremental
 
     odp:
-      schema: "odp"  # Ensure this is correct
+      schema: "odp"  # ✅ Ensure this matches your BigQuery dataset
       materialized: incremental
 
 # -- If your model uses materialized: table, dbt drops and recreates the table every time.
