@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: landing
+    database: "{{ env_var('GCP_PROJECT_ID') }}"  # Your GCP project ID
+    schema: landing  # ✅ This is how dbt will find landing tables
+    tables:
+      - name: Iris

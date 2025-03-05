@@ -21,7 +21,7 @@ models:
       schema: "staging"  # Ensure this is correct
       materialized: table
 
-    odp_final:
+    odp:
       schema: "odp"  # Ensure this is correct
       materialized: incremental
 

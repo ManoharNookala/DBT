@@ -1,25 +1,18 @@
 DBT:
-  target: odp_final
+  target: odp
   outputs:
-    odp_final:
+    odp:
       type: bigquery
       method: service-account
       project: "{{ env_var('GCP_PROJECT_ID') }}"
-      dataset: "{{ env_var('ODP_DATASET_NAME') }}"
+      dataset: "odp"
       threads: 4
       keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
     staging:
       type: bigquery
       method: service-account
       project: "{{ env_var('GCP_PROJECT_ID') }}"
-      dataset: "{{ env_var('STAGING_DATASET_NAME') }}"
+      dataset: "staging"
       threads: 4
       keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
 
-    landing:
-      type: bigquery
-      method: service-account
-      project: "{{ env_var('GCP_PROJECT_ID') }}"
-      dataset: "{{ env_var('LANDING_DATASET_NAME') }}"
-      threads: 4
-      keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
