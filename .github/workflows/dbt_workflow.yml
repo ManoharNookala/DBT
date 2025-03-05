@@ -24,9 +24,6 @@ jobs:
 
       - name: Install Python and dbt
         run: |
-          python3 -m venv venv
-          source venv/bin/activate
-          pip install --upgrade pip
           pip install dbt-bigquery
 
       - name: Run dbt Debug (Check Connection)
