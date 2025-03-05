@@ -1,4 +1,5 @@
 {{ config(
+  schema='odp',
     materialized='incremental'
 ) }}
 

@@ -1,4 +1,5 @@
 {{ config(
+  schema='staging',
     materialized='incremental'
 ) }}
 
