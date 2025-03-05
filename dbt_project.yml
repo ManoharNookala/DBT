@@ -14,13 +14,17 @@ snapshot-paths: ["snapshots"]
 models:
   DBT:
     landing:
-      schema: "{{ env_var('LANDING_DATASET_NAME') }}"
-      materialized: incremental
+      schema: "landing"
+      materialized: view
 
     staging:
-      schema: "{{ env_var('STAGING_DATASET_NAME') }}"
-      materialized: incremental
+      schema: "staging"  # Ensure this is correct
+      materialized: table
 
     odp_final:
-      schema: "{{ env_var('ODP_DATASET_NAME') }}"
+      schema: "odp"  # Ensure this is correct
       materialized: incremental
+
+# -- If your model uses materialized: table, dbt drops and recreates the table every time.
+# -- If your model uses materialized: view, dbt replaces the view.
+# -- ✅ Fix: Use materialized: incremental instead.
