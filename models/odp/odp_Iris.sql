@@ -1,5 +1,6 @@
 {{ config(
   materialized='incremental',
+  schema="odp",
   post_hook="DELETE FROM {{ ref('stg_Iris') }} WHERE TRUE"
 ) }}
 
