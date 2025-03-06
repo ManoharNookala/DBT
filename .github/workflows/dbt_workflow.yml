@@ -31,16 +31,16 @@ jobs:
           pip install dbt-bigquery
 
       - name: Run dbt Debug (Check Connection)
-        run: dbt debug --profiles-dir ./profiles --target Origin_Data_Platform
+        run: dbt debug --profiles-dir ./profile --target Origin_Data_Platform
 
       - name: Run dbt Compile
-        run: dbt compile --profiles-dir ./profiles --target Origin_Data_Platform
+        run: dbt compile --profiles-dir ./profile --target Origin_Data_Platform
 
       - name: Run dbt Models
-        run: dbt run --profiles-dir ./profiles --target Origin_Data_Platform
+        run: dbt run --profiles-dir ./profile --target Origin_Data_Platform
 
       - name: Run dbt Tests
-        run: dbt test --profiles-dir ./profiles --target Origin_Data_Platform
+        run: dbt test --profiles-dir ./profile --target Origin_Data_Platform
 
       - name: Clean Up
         run: rm -f $HOME/service_account.json
