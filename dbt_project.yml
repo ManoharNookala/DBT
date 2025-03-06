@@ -14,9 +14,9 @@ model-paths: ["models"]
 models:
   DBT:
     staging:
-      schema: staging  
+      +schema: staging  # ✅ Ensure schema applies correctly
     odp:
-      schema: odp      
+      +schema: odp  # ✅ Prevents automatic dataset creation like odp_odp   
 
 # -- If your model uses materialized: table, dbt drops and recreates the table every time.
 # -- If your model uses materialized: view, dbt replaces the view.
