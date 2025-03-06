@@ -1,6 +1,6 @@
 {{ config(
     materialized='incremental',
-    pre_hook="DELETE FROM {{ ref('stg_Iris') }} WHERE TRUE"
+    pre_hook="DELETE FROM {{ this }} WHERE TRUE"
 ) }}
 
 SELECT DISTINCT *
