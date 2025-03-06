@@ -17,5 +17,5 @@ models:
       +schema: staging  # ✅ Ensure schema applies correctly
       +materialized: incremental  # ✅ Apply default materialization for staging
     odp:
-      +schema: odp  # ✅ Prevents automatic dataset creation like odp_odp
+      +schema: null  # ✅ Prevents automatic dataset creation like odp_odp
       +materialized: incremental  # ✅ Set incremental as default for ODP
