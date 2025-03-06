@@ -32,6 +32,9 @@ jobs:
       - name: Run dbt Debug (Check Connection)
         run: dbt debug --profiles-dir ./profile
 
+      - name: Run dbt Compile
+        run: dbt compile --profiles-dir ./profile --target odp
+
       - name: Run dbt Models
         run: dbt run --profiles-dir ./profile --target odp
 
@@ -40,3 +43,7 @@ jobs:
 
       - name: Clean Up
         run: rm -f /tmp/service_account.json
+
+
+# dbt clean: Removes old compiled files (target/manifest.json).
+# dbt compile: Checks SQL syntax.

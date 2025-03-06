@@ -1,4 +1,4 @@
--- {{ config(
+/*-- {{ config(
 --   schema='staging',
 --     materialized='incremental',
 --     partition_by={
@@ -7,6 +7,7 @@
 --     "granularity": "day"
 --     }
 -- ) }}
+*/
 
 {{ config(
   materialized='incremental'

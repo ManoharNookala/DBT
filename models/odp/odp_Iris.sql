@@ -11,7 +11,8 @@ WHERE DATE(timestamp_created) = DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
   AND DATE(timestamp_created) > (SELECT MAX(DATE(timestamp_created)) FROM {{ this }})
 {% endif %}
 
-
+/*
 -- is_incremental() → Ensures only new data is inserted in future runs:
 -- First run → Loads everything from yesterday
 -- Next runs → Loads only records newer than the latest timestamp in {{ this }} (i.e., odp.{{ model_name }})
+*/
