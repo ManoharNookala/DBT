@@ -1,14 +1,12 @@
 {{ config(
-  materialized='incremental'
+  materialized='incremental',
+  post_hook="DELETE FROM `learn-436612.staging.stg_Iris` WHERE TRUE"
   ) }}
 
 
 SELECT DISTINCT *
 FROM `learn-436612.staging.stg_Iris`
 
-{% if is_incremental() %}
-  AND DATE(timestamp_created) > (SELECT MAX(DATE(timestamp_created)) FROM `{{learn-436612.odp.odp_Iris }}`)
-{% endif %}
 
 /*
 -- is_incremental() → Ensures only new data is inserted in future runs:

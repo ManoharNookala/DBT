@@ -1,15 +1,17 @@
-
 {{ config(
-  materialized='incremental'
-  
-  ) }}
+    materialized='incremental'
+) }}
 
 SELECT DISTINCT *
 FROM `learn-436612.landing.Iris`
 WHERE DATE(timestamp_created) = DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
 
+{%-set insert_into = source("staging", "stg_Iris")-%}
+
 {% if is_incremental() %}
-  AND DATE(timestamp_created) > (SELECT MAX(DATE(timestamp_created)) FROM `{{learn-436612.staging.stg_Iris }}` )  -- Only new data
+  AND timestamp_created > (
+      SELECT COALESCE(MAX(timestamp_created), '1900-01-01') FROM {{ insert_into }}
+  )
 {% endif %}
 
 -- If your model uses materialized: table, dbt drops and recreates the table every time.
