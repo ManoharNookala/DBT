@@ -13,9 +13,6 @@ model-paths: ["models"]
 
 models:
   DBT:
-    landing:
-      +schema: landing  # ✅ Ensure schema applies correctly
-      +materialized: view  # ✅ Apply default materialization for staging
     staging:
       +schema: staging  # ✅ Ensure schema applies correctly
       +materialized: incremental  # ✅ Apply default materialization for staging
