@@ -1,7 +1,7 @@
 DBT:
-  target: odp
+  target: Origin_Data_Platform
   outputs:
-    odp:
+    Origin_Data_Platform:
       type: bigquery
       method: service-account
       project: "{{ env_var('GCP_PROJECT_ID') }}"
