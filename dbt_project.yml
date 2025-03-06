@@ -14,12 +14,9 @@ model-paths: ["models"]
 models:
   DBT:
     staging:
-      schema: "staging"  # ✅ Ensure this matches your BigQuery dataset
-      materialized: incremental
-
+      schema: staging   # ✅ Ensure correct dataset
     odp:
-      schema: "odp"  # ✅ Ensure this matches your BigQuery dataset
-      materialized: incremental
+      schema: odp       # ✅ This should be 'odp', NOT 'odp_odp'
 
 # -- If your model uses materialized: table, dbt drops and recreates the table every time.
 # -- If your model uses materialized: view, dbt replaces the view.
