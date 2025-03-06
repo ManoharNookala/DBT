@@ -1,5 +1,14 @@
+-- {{ config(
+--   schema='staging',
+--     materialized='incremental',
+--     partition_by={
+--     "field": "timestamp_created",
+--     "data_type": "timestamp",
+--     "granularity": "day"
+--     }
+-- ) }}
+
 {{ config(
-  schema='staging',
     materialized='incremental'
 ) }}
 
