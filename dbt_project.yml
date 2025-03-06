@@ -2,7 +2,7 @@ name: 'DBT'
 version: '1.0.0'
 config-version: 2
 
-profile: 'DBT'  # This must match the profile name in profiles.yml
+profile: 'DBT'  # ✅ Must match the profile name in profiles.yml
 
 model-paths: ["models"]
 # seed-paths: ["seeds"]
@@ -15,9 +15,7 @@ models:
   DBT:
     staging:
       +schema: staging  # ✅ Ensure schema applies correctly
+      +materialized: incremental  # ✅ Apply default materialization for staging
     odp:
-      +schema: odp  # ✅ Prevents automatic dataset creation like odp_odp   
-
-# -- If your model uses materialized: table, dbt drops and recreates the table every time.
-# -- If your model uses materialized: view, dbt replaces the view.
-# -- ✅ Fix: Use materialized: incremental instead.
+      +schema: odp  # ✅ Prevents automatic dataset creation like odp_odp
+      +materialized: incremental  # ✅ Set incremental as default for ODP

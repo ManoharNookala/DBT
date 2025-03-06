@@ -1,12 +1,11 @@
 {{ config(
   materialized='incremental',
-  schema='odp',
-  post_hook="DELETE FROM `learn-436612.staging.stg_Iris` WHERE TRUE"
-  ) }}
-
+  post_hook="DELETE FROM {{ ref('stg_Iris') }} WHERE TRUE"
+) }}
 
 SELECT DISTINCT *
-FROM `learn-436612.staging.stg_Iris`
+FROM {{ ref('stg_Iris') }}
+
 
 
 /*
