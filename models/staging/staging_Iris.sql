@@ -8,7 +8,9 @@
 --     }
 -- ) }}
 
-{{ config(materialized='incremental') }}
+{{ config(
+  materialized='incremental'
+  ) }}
 
 SELECT DISTINCT *
 FROM `learn-436612.landing.Iris`
