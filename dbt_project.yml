@@ -14,8 +14,6 @@ model-paths: ["models"]
 models:
   DBT:
     staging:
-      +schema: staging  # ✅ Ensure schema applies correctly
       +materialized: incremental  # ✅ Apply default materialization for staging
     odp:
-      +schema: null  # ✅ Prevents automatic dataset creation like odp_odp
       +materialized: incremental  # ✅ Set incremental as default for ODP
