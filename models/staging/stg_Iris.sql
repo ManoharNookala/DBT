@@ -1,7 +1,6 @@
 
 {{ config(
-  materialized='incremental',
-  schema='staging'
+  materialized='incremental'
   
   ) }}
 
