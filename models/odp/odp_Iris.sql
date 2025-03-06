@@ -5,10 +5,10 @@
 
 
 SELECT DISTINCT *
-FROM `learn-436612.staging.Iris`
+FROM `learn-436612.staging.stg_Iris`
 
 {% if is_incremental() %}
-  AND DATE(timestamp_created) > (SELECT MAX(DATE(timestamp_created)) FROM `{{learn-436612.odp.Iris }}`)
+  AND DATE(timestamp_created) > (SELECT MAX(DATE(timestamp_created)) FROM `{{learn-436612.odp.odp_Iris }}`)
 {% endif %}
 
 /*
