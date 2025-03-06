@@ -1,5 +1,6 @@
 {{ config(
   materialized='incremental',
+  schema='odp'  -- ✅ Ensures schema is odp, prevents odp_odp
   post_hook="DELETE FROM `learn-436612.staging.stg_Iris` WHERE TRUE"
   ) }}
 
