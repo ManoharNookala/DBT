@@ -11,12 +11,12 @@ model-paths: ["models"]
 # macro-paths: ["macros"]
 # snapshot-paths: ["snapshots"]
 
-models:
-  DBT:
-    odp:
-      schema: "odp"
-      materialized: incremental  
-    staging:
-      schema: "staging"
-      materialized: incremental
+# models:
+#   DBT:
+#     odp:
+#       schema: "odp"
+#       materialized: incremental  
+#     staging:
+#       schema: "staging"
+#       materialized: incremental
 
