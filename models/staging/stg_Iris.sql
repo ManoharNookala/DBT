@@ -5,7 +5,7 @@
 ) }}
 
 SELECT DISTINCT *
-FROM `{{ learn-436612.landing.Iris }}`
+FROM {{ database }}.landing.Iris
 WHERE DATE(timestamp_created) = DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
 
 {% if is_incremental() %}
