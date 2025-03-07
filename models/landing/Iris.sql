@@ -1,3 +1,3 @@
 select * 
-from {{ database }}.staging.stg_Iris
+from {{ source('landing', 'Iris') }}
 WHERE DATE(timestamp_created) = DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
