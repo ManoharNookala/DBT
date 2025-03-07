@@ -1,20 +1,14 @@
 DBT:
-  target: Origin_Data_Platform  # ✅ Matches the target name used in dbt commands
+  target: dev  # ✅ Matches the target name used in dbt commands
   outputs:
-    Origin_Data_Platform:  # ✅ Ensure consistency with the target name
+    dev:  # ✅ Ensure consistency with the target name
       type: bigquery
       method: service-account
       project: "{{ env_var('GCP_PROJECT_ID') }}"
-      dataset: odp  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
+      dataset: ''  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
       threads: 4  # ✅ Recommended: Increase threads for performance
       keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
 
-    staging:
-      type: bigquery
-      method: service-account
-      project: "{{ env_var('GCP_PROJECT_ID') }}"
-      dataset: staging  # ✅ Ensure correct dataset reference
-      threads: 4  # ✅ Increase threads for better concurrency
-      keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
+
 
 
