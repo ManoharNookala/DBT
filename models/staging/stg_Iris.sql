@@ -1,7 +1,7 @@
 {{ config(
     materialized='incremental',
     schema="staging",
-    pre_hook="DELETE FROM {{ this }} WHERE TRUE"
+    pre_hook="DELETE FROM '{{ learn-436612.staging.stg_Iris }}' WHERE TRUE"
 ) }}
 
 SELECT DISTINCT *

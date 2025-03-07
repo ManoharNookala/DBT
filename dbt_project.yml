@@ -14,9 +14,11 @@ model-paths: ["models"]
 models:
   DBT:
     odp:
+      +alias: "odp"
       +schema: "odp"
       +materialized: incremental  # ✅ Set incremental as default for ODP
     staging:
+      +alias: "staging"
       +schema: "staging"
       +materialized: incremental  # ✅ Apply default materialization for staging
 
