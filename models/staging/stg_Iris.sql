@@ -1,11 +1,11 @@
 {{ config(
     materialized='incremental',
     schema="staging",
-    pre_hook="DELETE FROM {{ database }}.{{ schema }}.stg_Iris WHERE TRUE"
+    pre_hook="DELETE FROM {{ database }}.staging.stg_Iris WHERE TRUE"
 ) }}
 
 SELECT DISTINCT *
-FROM {{ ref('Iris') }}  
+FROM `{{ learn-436612.landing.Iris }}`
 WHERE DATE(timestamp_created) = DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
 
 {% if is_incremental() %}
