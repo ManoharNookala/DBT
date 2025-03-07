@@ -5,7 +5,7 @@
 ) }}
 
 SELECT DISTINCT *
-FROM {{ database }}.staging.stg_Iris
+FROM {{ ref('stg_Iris') }}
 
 
 
