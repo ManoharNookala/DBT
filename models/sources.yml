@@ -1,6 +1,6 @@
 version: 2
 
-sources:
+source:
   - name: landing
     database: "{{ env_var('GCP_PROJECT_ID') }}"  # Your GCP project ID
     schema: landing  # ✅ Use schema as a string, not inside quotes unless needed
