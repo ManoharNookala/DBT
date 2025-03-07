@@ -5,7 +5,7 @@
 ) }}
 
 SELECT DISTINCT *
-FROM {{ source('staging', 'stg_Iris') }}
+FROM {{ database }}.staging.stg_Iris
 
 
 
