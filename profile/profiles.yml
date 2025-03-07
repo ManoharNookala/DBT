@@ -6,7 +6,7 @@ DBT:
       method: service-account 
       project: "{{ env_var('GCP_PROJECT_ID') }}"
       dataset: odp  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
-      threads: 4  # ✅ Recommended: Increase threads for performance
+      threads: 1  # ✅ Recommended: Increase threads for performance
       keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
 
 
