@@ -3,7 +3,7 @@ DBT:
   outputs:
     dev:  # ✅ Ensure consistency with the target name
       type: bigquery
-      method: service-account
+      method: service-account 
       project: "{{ env_var('GCP_PROJECT_ID') }}"
       dataset: ''  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
       threads: 4  # ✅ Recommended: Increase threads for performance
