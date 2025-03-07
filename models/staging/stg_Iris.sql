@@ -5,12 +5,12 @@
 ) }}
 
 SELECT DISTINCT *
-FROM {{ source('landing', 'Iris') }}
+FROM {{ database }}.landing.Iris
 WHERE DATE(timestamp_created) = DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
 
 {% if is_incremental() %}
   AND timestamp_created > (
       SELECT COALESCE(MAX(timestamp_created), TIMESTAMP('1900-01-01')) 
-      FROM {{ source('staging', 'stg_Iris') }}
+      FROM {{ database }}.staging.stg_Iris
   )
 {% endif %}
