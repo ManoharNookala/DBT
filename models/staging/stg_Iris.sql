@@ -1,6 +1,5 @@
 {{ config(
     materialized='incremental',
-    schema="staging",
     pre_hook="DELETE FROM {{source('staging', 'stg_Iris')}} WHERE TRUE"
 ) }}
 
