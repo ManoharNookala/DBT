@@ -3,10 +3,10 @@ name: DBT_for_BigQuery_Using_GitHub_Actions
 on:
   push:
     branches:
-      - main
+      - main  # Change this if you're using a different branch
   schedule:
-    - cron: '30 4 * * *'  # Runs every day at 9:30 AM IST (4:30 AM UTC)
-  workflow_dispatch:
+    - cron: '30 4 * * *'  # Runs every day at 9:30 IST [4:30 AM UTC]
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   dbt-run:
@@ -31,19 +31,17 @@ jobs:
           pip install dbt-bigquery
 
       - name: Run dbt Debug (Check Connection)
-        run: dbt debug --profiles-dir . --target odp  # Ensure 'odp' target is used
+        run: dbt debug --profiles-dir ./profile --target dev
 
       - name: Run dbt Compile
-        run: dbt compile --profiles-dir . --target odp
+        run: dbt compile --profiles-dir ./profile --target dev
 
-      - name: Run dbt Models (Landing → Staging)
-        run: dbt run --profiles-dir . --select staging --target odp  # Run staging models
-
-      - name: Run dbt Models (Staging → ODP)
-        run: dbt run --profiles-dir . --select odp --target odp  # Run ODP models
+      - name: Run dbt Models
+        run: dbt run --profiles-dir ./profile --target dev
 
       - name: Run dbt Tests
-        run: dbt test --profiles-dir . --target odp
+        run: dbt test --profiles-dir ./profile --target dev
 
       - name: Clean Up
         run: rm -f $HOME/service_account.json
+
