@@ -1,0 +1,5 @@
+packages:
+  - package: dbt-labs/dbt-core
+    version: 1.7.18
+  - package: dbt-labs/dbt-bigquery
+    version: 1.7.9
