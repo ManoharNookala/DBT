@@ -1,12 +1,10 @@
 DBT:
-  target: dev  # ✅ Default target (change as needed)
+  target: dev  # ✅ Matches the target name used in dbt commands
   outputs:
-    dev:  # ✅ ODP target
+    dev:  # ✅ Ensure consistency with the target name
       type: bigquery
-      method: service-account
+      method: service-account 
       project: "{{ env_var('GCP_PROJECT_ID') }}"
-      dataset: odp  # ✅ Ensures dbt uses the "odp" dataset
-      threads: 1  # ✅ Adjust based on performance needs
+      dataset: staging  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
+      threads: 1  # ✅ Recommended: Increase threads for performance
       keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
-
-
