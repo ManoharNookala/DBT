@@ -12,9 +12,9 @@ jobs:
   dbt-run:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        environment: [dev, int, preprod, prod]  # ✅ Runs for all environments
+    # strategy:
+    #   matrix:
+    #     environment: [dev, int, preprod, prod]  # ✅ Runs for all environments
 
     steps:
       - name: Checkout repository
