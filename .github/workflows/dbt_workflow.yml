@@ -3,14 +3,18 @@ name: DBT_for_BigQuery_Using_GitHub_Actions
 on:
   push:
     branches:
-      - main  # Change this if you're using a different branch
+      - main  # ✅ Runs when code is pushed to main
   schedule:
-    - cron: '30 4 * * *'  # Runs every day at 9:30 IST [4:30 AM UTC]
-  workflow_dispatch:  # Allows manual triggering
+    - cron: '30 4 * * *'  # ✅ Runs daily at 9:30 AM IST (4:30 AM UTC)
+  workflow_dispatch:  # ✅ Allows manual triggering
 
 jobs:
   dbt-run:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        environment: [dev, int, preprod, prod]  # ✅ Runs for all environments
 
     steps:
       - name: Checkout repository
@@ -18,30 +22,12 @@ jobs:
 
       - name: Set Environment Variables
         run: |
+          echo "DBT_TARGET=${{ matrix.environment }}" >> $GITHUB_ENV
           echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
-          echo "LANDING_DATASET_NAME=${{ secrets.LANDING_DATASET_NAME }}" >> $GITHUB_ENV
-          echo "STAGING_DATASET_NAME=${{ secrets.STAGING_DATASET_NAME }}" >> $GITHUB_ENV
-          echo "ODP_DATASET_NAME=${{ secrets.ODP_DATASET_NAME }}" >> $GITHUB_ENV
+          echo "STAGING_DATASET=${{ secrets.STAGING_DATASET }}" >> $GITHUB_ENV
+          echo "ODP_DATASET=${{ secrets.ODP_DATASET }}" >> $GITHUB_ENV
           echo '${{ secrets.GCP_CREDENTIALS }}' > $HOME/service_account.json
           echo "GCP_CREDENTIALS=$HOME/service_account.json" >> $GITHUB_ENV
 
-      - name: Install Python and dbt
-        run: |
-          python -m pip install --upgrade pip
-          pip install dbt-bigquery
-
-      - name: Run dbt Debug (Check Connection)
-        run: dbt debug --profiles-dir ./profile --target dev
-
-      - name: Run dbt Compile
-        run: dbt compile --profiles-dir ./profile --target dev
-
-      - name: Run dbt Models
-        run: dbt run --profiles-dir ./profile --target dev
-
-      - name: Run dbt Tests
-        run: dbt test --profiles-dir ./profile --target dev
-
-      - name: Clean Up
-        run: rm -f $HOME/service_account.json
-
+      - name: Run dbt script
+        run: chmod +x scripts/run_dbt.sh && ./scripts/run_dbt.sh

@@ -2,20 +2,20 @@ name: 'DBT'
 version: '1.0.0'
 config-version: 2
 
-profile: 'DBT'  # ✅ Must match the profile name in profiles.yml
+profile: 'DBT'  # ✅ Matches profiles.yml
 
 model-paths: ["models"]
-# seed-paths: ["seeds"]
-# test-paths: ["tests"]
-# analysis-paths: ["analyses"]
-# macro-paths: ["macros"]
-# snapshot-paths: ["snapshots"]
+seed-paths: ["seeds"]  # ✅ Uncommented if needed
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
 
-# models:
-#   DBT:
-#     odp:
-#       +schema: "odp"
-#       +materialized: incremental  # ✅ Set incremental as default for ODP
-#     staging:
-#       +schema: "staging"
-#       +materialized: incremental  # ✅ Apply default materialization for staging
+models:
+  DBT:
+    staging:
+      +schema: "{{ env_var('STAGING_DATASET', 'staging') }}"  # ✅ Uses env variable for flexibility
+      +materialized: "incremental"
+    odp:
+      +schema: "{{ env_var('ODP_DATASET', 'odp') }}"  # ✅ Uses env variable for flexibility
+      +materialized: "incremental"
