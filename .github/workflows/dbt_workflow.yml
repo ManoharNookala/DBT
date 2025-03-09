@@ -3,7 +3,7 @@ name: DBT_for_BigQuery_Using_GitHub_Actions
 on:
   push:
     branches:
-      - main  # Triggers when code is pushed to the 'main' branch
+      - main  # Runs when code is pushed to main
   schedule:
     - cron: '30 4 * * *'  # Runs daily at 9:30 AM IST (4:30 AM UTC)
   workflow_dispatch:  # Allows manual triggering of the workflow
@@ -18,13 +18,28 @@ jobs:
 
       - name: Set Environment Variables
         run: |
+          echo "DBT_TARGET=staging" >> $GITHUB_ENV  # Default to 'staging'
           echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
           echo "STAGING_DATASET=${{ secrets.STAGING_DATASET }}" >> $GITHUB_ENV
           echo "ODP_DATASET=${{ secrets.ODP_DATASET }}" >> $GITHUB_ENV
-          echo '${{ secrets.GCP_CREDENTIALS }}' > $HOME/service_account.json
+          echo "${{ secrets.GCP_CREDENTIALS }}" > $HOME/service_account.json
           echo "GCP_CREDENTIALS=$HOME/service_account.json" >> $GITHUB_ENV
 
-      - name: Run DBT Script
+      - name: Run dbt Workflow
         run: |
-          chmod +x scripts/run_dbt.sh
-          ./scripts/run_dbt.sh
+          #!/bin/bash
+          set -e  # Stop script on error
+
+          # Install dbt dependencies
+          python -m pip install --upgrade pip
+          pip install dbt-core==1.7.18 dbt-bigquery==1.7.9
+
+          # Run dbt commands
+          dbt debug --profiles-dir ./profiles --target $DBT_TARGET
+          dbt compile --profiles-dir ./profiles --target $DBT_TARGET
+          dbt run --profiles-dir ./profiles --target staging    # Landing → Staging
+          dbt run --profiles-dir ./profiles --target odp_final  # Staging → ODP
+          dbt test --profiles-dir ./profiles --target odp_final  # Testing final dataset
+
+          # Cleanup credentials
+          rm -f $HOME/service_account.json
