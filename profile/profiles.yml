@@ -1,10 +1,18 @@
 DBT:
-  target: dev  # ✅ Matches the target name used in dbt commands
+  target: "{{ env_var('DBT_TARGET', 'staging') }}"  # Defaults to 'staging' if not set
   outputs:
-    dev:  # ✅ Ensure consistency with the target name
+    staging:  # Staging target (Landing → Staging)
       type: bigquery
-      method: service-account 
+      method: service-account
+      project: "{{ env_var('GCP_PROJECT_ID') }}"  # Use environment variable for flexibility
+      dataset: "{{ env_var('DBT_STAGING_DATASET', 'staging') }}"  # Added flexibility for dataset
+      threads: 4  # Adjust based on performance needs
+      keyfile: "{{ env_var('GCP_CREDENTIALS') }}"  # Reference service account keyfile
+
+    odp_final:  # Final dataset (Staging → ODP)
+      type: bigquery
+      method: service-account
       project: "{{ env_var('GCP_PROJECT_ID') }}"
-      dataset: staging  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
-      threads: 1  # ✅ Recommended: Increase threads for performance
+      dataset: "{{ env_var('DBT_FINAL_DATASET', 'odp') }}"  # Added flexibility for dataset
+      threads: 4
       keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
