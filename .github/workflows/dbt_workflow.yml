@@ -3,43 +3,44 @@ name: DBT_for_BigQuery_Using_GitHub_Actions
 on:
   push:
     branches:
-      - main  # Runs when code is pushed to main
+      - main  # Change this if you're using a different branch
   schedule:
-    - cron: '30 4 * * *'  # Runs daily at 9:30 AM IST (4:30 AM UTC)
-  workflow_dispatch:  # Allows manual triggering of the workflow
+    - cron: '30 4 * * *'  # Runs every day at 9:30 IST [4:30 AM UTC]
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   dbt-run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set Environment Variables
         run: |
-          echo "DBT_TARGET=staging" >> $GITHUB_ENV  # Default to 'staging'
           echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
-          echo "STAGING_DATASET=${{ secrets.STAGING_DATASET }}" >> $GITHUB_ENV
-          echo "ODP_DATASET=${{ secrets.ODP_DATASET }}" >> $GITHUB_ENV
-          echo "${{ secrets.GCP_CREDENTIALS }}" > $HOME/service_account.json
+          echo "LANDING_DATASET_NAME=${{ secrets.LANDING_DATASET_NAME }}" >> $GITHUB_ENV
+          echo "STAGING_DATASET_NAME=${{ secrets.STAGING_DATASET_NAME }}" >> $GITHUB_ENV
+          echo "ODP_DATASET_NAME=${{ secrets.ODP_DATASET_NAME }}" >> $GITHUB_ENV
+          echo '${{ secrets.GCP_CREDENTIALS }}' > $HOME/service_account.json
           echo "GCP_CREDENTIALS=$HOME/service_account.json" >> $GITHUB_ENV
 
-      - name: Run dbt Workflow
+      - name: Install Python and dbt
         run: |
-          #!/bin/bash
-          set -e  # Stop script on error
-
-          # Install dbt dependencies
           python -m pip install --upgrade pip
-          pip install dbt-core==1.7.18 dbt-bigquery==1.7.9
+          pip install dbt-bigquery
 
-          # Run dbt commands
-          dbt debug --profiles-dir ./profiles --target $DBT_TARGET
-          dbt compile --profiles-dir ./profiles --target $DBT_TARGET
-          dbt run --profiles-dir ./profiles --target staging    # Landing → Staging
-          dbt run --profiles-dir ./profiles --target odp_final  # Staging → ODP
-          dbt test --profiles-dir ./profiles --target odp_final  # Testing final dataset
+      - name: Run dbt Debug (Check Connection)
+        run: dbt debug --profiles-dir ./profile --target dev
 
-          # Cleanup credentials
-          rm -f $HOME/service_account.json
+      - name: Run dbt Compile
+        run: dbt compile --profiles-dir ./profile --target dev
+
+      - name: Run dbt Models
+        run: dbt run --profiles-dir ./profile --target dev
+
+      - name: Run dbt Tests
+        run: dbt test --profiles-dir ./profile --target dev
+
+      - name: Clean Up
+        run: rm -f $HOME/service_account.json
