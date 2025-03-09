@@ -3,31 +3,29 @@ name: DBT_for_BigQuery_Using_GitHub_Actions
 on:
   push:
     branches:
-      - main  # ✅ Runs when code is pushed to main
+      - main  # Triggers when code is pushed to the 'main' branch
   schedule:
-    - cron: '30 4 * * *'  # ✅ Runs daily at 9:30 AM IST (4:30 AM UTC)
-  workflow_dispatch:  # ✅ Allows manual triggering
+    - cron: '30 4 * * *'  # Runs daily at 9:30 AM IST (4:30 AM UTC)
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
   dbt-run:
     runs-on: ubuntu-latest
 
-    # strategy:
-    #   matrix:
-    #     environment: [dev, int, preprod, prod]  # ✅ Runs for all environments
-
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set Environment Variables
         run: |
-          echo "DBT_TARGET=${{ matrix.environment }}" >> $GITHUB_ENV
+          echo "DBT_TARGET=dev" >> $GITHUB_ENVS
           echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
           echo "STAGING_DATASET=${{ secrets.STAGING_DATASET }}" >> $GITHUB_ENV
           echo "ODP_DATASET=${{ secrets.ODP_DATASET }}" >> $GITHUB_ENV
           echo '${{ secrets.GCP_CREDENTIALS }}' > $HOME/service_account.json
           echo "GCP_CREDENTIALS=$HOME/service_account.json" >> $GITHUB_ENV
 
-      - name: Run dbt script
-        run: chmod +x scripts/run_dbt.sh && ./scripts/run_dbt.sh
+      - name: Run DBT Script
+        run: |
+          chmod +x scripts/run_dbt.sh
+          ./scripts/run_dbt.sh
