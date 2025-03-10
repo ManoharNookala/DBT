@@ -1,7 +1,10 @@
 {{ config(
-  materialized='incremental'
+  materialized='incremental',
+  schema='odp',
+  post_hook="DELETE FROM {{source('staging', 'stg_Iris')}} WHERE TRUE"
   
 ) }}
--- post_hook="DELETE FROM {{source('staging', 'stg_Iris')}} WHERE TRUE"
+
 SELECT DISTINCT *
-FROM {{source('staging', 'stg_Iris')}}
+FROM {{ ref('stg_Iris') }}
+--{{source('staging', 'stg_Iris')}}
