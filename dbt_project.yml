@@ -11,12 +11,12 @@ model-paths: ["models"]
 # macro-paths: ["macros"]
 # snapshot-paths: ["snapshots"]
 
-models:
-  DBT:
-    staging:
-      +schema: staging
-    odp:
-      +schema: odp
+# models:
+#   DBT:
+#     staging:
+#       +schema: staging
+#     odp:
+#       +schema: odp
 
 
 # vars:
