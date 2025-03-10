@@ -34,6 +34,9 @@ jobs:
       - name: Run dbt Debug (Staging)
         run: dbt debug --profiles-dir ./profile --target dev --profile DBT_staging
 
+      - name: List Available Sources in dbt (Debugging Step)
+        run: dbt ls --resource-type source  # ✅ Lists all defined sources
+
       - name: Run dbt Compile (Staging)
         run: dbt compile --profiles-dir ./profile --target dev --profile DBT_staging
 
