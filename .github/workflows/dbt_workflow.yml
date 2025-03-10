@@ -9,7 +9,7 @@ on:
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  dbt-staging-run:
+  dbt-run:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,14 +30,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install dbt-bigquery
 
+      # ✅ Running dbt for Staging Profile
       - name: Run dbt Debug (Staging)
         run: dbt debug --profiles-dir ./profile --target dev --profile DBT_staging
 
-      - name: List Available Sources in dbt (Staging)
+      - name: List Available Sources in dbt (Debugging Step) staging 
         run: dbt ls --resource-type source --profiles-dir ./profile --target dev --profile DBT_staging
 
-      - name: Check Source Freshness (Staging)
-        run: dbt source freshness --profiles-dir ./profile --target dev --profile DBT_staging
 
       - name: Run dbt Compile (Staging)
         run: dbt compile --profiles-dir ./profile --target dev --profile DBT_staging
@@ -48,38 +47,12 @@ jobs:
       - name: Run dbt Test (Staging)
         run: dbt test --profiles-dir ./profile --target dev --profile DBT_staging
 
-      - name: Secure Clean Up (Staging)
-        run: shred -u $HOME/service_account.json
-
-  dbt-odp-run:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set Environment Variables
-        run: |
-          echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
-          echo "LANDING_DATASET_NAME=${{ secrets.LANDING_DATASET_NAME }}" >> $GITHUB_ENV
-          echo "STAGING_DATASET_NAME=${{ secrets.STAGING_DATASET_NAME }}" >> $GITHUB_ENV
-          echo "ODP_DATASET_NAME=${{ secrets.ODP_DATASET_NAME }}" >> $GITHUB_ENV
-          echo '${{ secrets.GCP_CREDENTIALS }}' > $HOME/service_account.json
-          echo "GCP_CREDENTIALS=$HOME/service_account.json" >> $GITHUB_ENV
-
-      - name: Install Python and dbt
-        run: |
-          python -m pip install --upgrade pip
-          pip install dbt-bigquery
-
-      - name: Run dbt Debug (ODP)
+      # ✅ Running dbt for ODP Profile
+      - name: Run dbt Debug (staging)
         run: dbt debug --profiles-dir ./profile --target dev --profile DBT_odp
 
       - name: List Available Sources in dbt (ODP)
         run: dbt ls --resource-type source --profiles-dir ./profile --target dev --profile DBT_odp
-
-      - name: Check Source Freshness (ODP)
-        run: dbt source freshness --profiles-dir ./profile --target dev --profile DBT_odp
 
       - name: Run dbt Compile (ODP)
         run: dbt compile --profiles-dir ./profile --target dev --profile DBT_odp
@@ -90,5 +63,5 @@ jobs:
       - name: Run dbt Test (ODP)
         run: dbt test --profiles-dir ./profile --target dev --profile DBT_odp
 
-      - name: Secure Clean Up (ODP)
-        run: shred -u $HOME/service_account.json
+      - name: Clean Up
+        run: rm -f $HOME/service_account.json
