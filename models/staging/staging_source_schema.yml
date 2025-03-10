@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: landing  # ✅ Refers to the staging dataset
     database: "{{ env_var('GCP_PROJECT_ID') }}"
-    schema: "{{ env_var('LANDING_DATASET_NAME') }}"  # ✅ Defined in GitHub Secrets
+    schema: "{{ env_var('LANDING_DATASET_NAME', 'landing') }}"  # ✅ Defined in GitHub Secrets
     tables:
       - name: Iris  # ✅ Table in staging dataset
 
