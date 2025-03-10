@@ -1,8 +1,0 @@
-# models/odp/odp_schema.yml
-version: 2
-sources:
-  - name: staging
-    database: "{{ env_var('GCP_PROJECT_ID') }}"
-    schema: "{{ env_var('STAGING_DATASET_NAME', 'staging') }}"
-    tables:
-      - name: stg_Iris  # 
