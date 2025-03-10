@@ -11,11 +11,11 @@ model-paths: ["models"]
 # macro-paths: ["macros"]
 # snapshot-paths: ["snapshots"]
 
-# models:
-#   DBT:
-#     odp:
-#       +schema: "odp"
-#       +materialized: incremental  # ✅ Set incremental as default for ODP
-#     staging:
-#       +schema: "staging"
-#       +materialized: incremental  # ✅ Apply default materialization for staging
+models:
+  DBT:
+    odp:
+      +schema: "odp"
+      +materialized: incremental  # ✅ Set incremental as default for ODP
+    staging:
+      +schema: "staging"
+      +materialized: incremental  # ✅ Apply default materialization for staging
