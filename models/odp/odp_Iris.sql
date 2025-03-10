@@ -5,11 +5,12 @@
 ) }}
 
 SELECT DISTINCT *
-FROM {{ ref('stg_Iris') }}
+FROM {{source('staging', 'stg_Iris')}}
+--{{ ref('stg_Iris') }}
 --{{source('staging', 'stg_Iris')}}
-
+where 
 {% if is_incremental() %}
-  AND timestamp_created > (
+   timestamp_created > (
       SELECT COALESCE(DATE(MAX(timestamp_created)), DATE('1900-01-01')) 
       FROM {{ this }}
   )
