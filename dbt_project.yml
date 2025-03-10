@@ -2,7 +2,7 @@ name: 'DBT'
 version: '1.0.0'
 config-version: 2
 
-profile: 'DBT'  # ✅ Must match the profile name in profiles.yml
+profile: 'DBT_staging'  # ✅ Must match the profile name in profiles.yml
 
 model-paths: ["models"]
 # seed-paths: ["seeds"]

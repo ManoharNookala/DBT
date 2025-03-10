@@ -1,5 +1,6 @@
 {{ config(
-  materialized='incremental'
+  materialized='incremental',
+  post_hook="DELETE FROM {{source('staging', 'stg_Iris')}} WHERE TRUE"
   
 ) }}
 

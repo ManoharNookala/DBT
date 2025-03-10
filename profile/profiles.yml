@@ -1,4 +1,4 @@
-DBT:
+DBT_odp:
   target: dev  # ✅ Matches the target name used in dbt commands
   outputs:
     dev:  # ✅ Ensure consistency with the target name
@@ -6,5 +6,16 @@ DBT:
       method: service-account 
       project: "{{ env_var('GCP_PROJECT_ID') }}"
       dataset: odp  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
+      threads: 1  # ✅ Recommended: Increase threads for performance
+      keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
+
+DBT_staging:
+  target: dev  # ✅ Matches the target name used in dbt commands
+  outputs:
+    dev:  # ✅ Ensure consistency with the target name
+      type: bigquery
+      method: service-account 
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: staging  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
       threads: 1  # ✅ Recommended: Increase threads for performance
       keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
