@@ -15,6 +15,7 @@ FROM {{source('staging', 'stg_Iris')}}
 {% if is_incremental() %}
   where timestamp_created > (
       SELECT COALESCE(DATE(MAX(timestamp_created)), DATE('1900-01-01')) 
-      FROM {{source('odp', 'odp_Iris')}}
+      FROM {{ this }}
+      --{{source('odp', 'odp_Iris')}}
   )
 {% endif %}
