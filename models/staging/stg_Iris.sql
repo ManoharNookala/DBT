@@ -5,7 +5,7 @@
 
 SELECT DISTINCT *
 FROM {{source('landing', 'Iris')}}
-WHERE DATE(timestamp_created) = DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY)
+WHERE DATE(timestamp_created) = DATE_SUB('2025-03-07', INTERVAL 1 DAY)
 
 {% if is_incremental() %}
   AND timestamp_created > (
