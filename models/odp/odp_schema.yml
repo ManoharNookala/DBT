@@ -5,5 +5,5 @@ sources:
     database: "{{ env_var('GCP_PROJECT_ID') }}"  # ✅ Use the correct BigQuery project
     schema: "{{ env_var('STAGING_DATASET_NAME') }}"  # ✅ Set dynamically from GitHub Secrets
     tables:
-      - name: stg_Iris
+      - name: odp_Iris
 
