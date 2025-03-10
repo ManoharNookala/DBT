@@ -8,3 +8,10 @@
 SELECT DISTINCT *
 FROM {{ ref('stg_Iris') }}
 --{{source('staging', 'stg_Iris')}}
+
+{% if is_incremental() %}
+  AND timestamp_created > (
+      SELECT COALESCE(DATE(MAX(timestamp_created)), DATE('1900-01-01')) 
+      FROM {{ ref('odp_Iris') }}
+  )
+{% endif %}
