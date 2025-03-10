@@ -11,7 +11,7 @@ model-paths: ["models"]
 # macro-paths: ["macros"]
 # snapshot-paths: ["snapshots"]
 
-models:
-  DBT:
-    stg_Iris:
-      materialized:table
+# models:
+#   DBT:
+#     stg_Iris:
+#       materialized:table

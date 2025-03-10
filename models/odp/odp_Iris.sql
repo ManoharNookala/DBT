@@ -1,6 +1,5 @@
 {{ config(
   materialized='incremental',
-  schema='odp',
   post_hook="DELETE FROM {{source('staging', 'stg_Iris')}} WHERE TRUE"
   
 ) }}
@@ -12,6 +11,6 @@ FROM {{ ref('stg_Iris') }}
 {% if is_incremental() %}
   AND timestamp_created > (
       SELECT COALESCE(DATE(MAX(timestamp_created)), DATE('1900-01-01')) 
-      FROM {{ ref('odp_Iris') }}
+      FROM {{ this }}
   )
 {% endif %}
