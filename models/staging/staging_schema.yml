@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: odp  # ✅ Reference the staging dataset
-    database: "{{ env_var('GCP_PROJECT_ID') }}"  # ✅ Use the correct BigQuery project
-    schema: "{{ env_var('STAGING_DATASET_NAME') }}"  # ✅ Set dynamically from GitHub Secrets
+  - name: staging  # ✅ Refers to the staging dataset
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
+    schema: "{{ env_var('STAGING_DATASET_NAME') }}"  # ✅ Defined in GitHub Secrets
     tables:
-      - name: stg_Iris
+      - name: stg_Iris  # ✅ Table in staging dataset
 
