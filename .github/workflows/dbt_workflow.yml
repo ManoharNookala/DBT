@@ -37,6 +37,7 @@ jobs:
         run: dbt compile --profiles-dir ./profile --target dev
 
       - name: Run dbt Models
+        
         run: dbt run --profiles-dir ./profile --target dev
 
       - name: Run dbt Tests

@@ -12,8 +12,15 @@ model-paths: ["models"]
 # snapshot-paths: ["snapshots"]
 
 models:
-  project_name:
+  DBT:
     staging:
-      schema: staging
-    odp:    
-      schema: odp
+      +schema: staging
+    odp:
+      +schema: odp
+
+
+# vars:
+#   dataset_mapping:
+#     models/staging: staging
+#     models/odp: odp
+    
