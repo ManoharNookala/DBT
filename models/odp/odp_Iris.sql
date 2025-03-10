@@ -1,5 +1,6 @@
 {{ config(
-  materialized='incremental'
+  materialized='incremental',
+  schema = "odp"
   
 ) }}
 
@@ -10,9 +11,9 @@ SELECT DISTINCT *
 FROM {{source('staging', 'stg_Iris')}}
 --{{ ref('stg_Iris') }}
 --{{source('staging', 'stg_Iris')}}
-where 
+ 
 {% if is_incremental() %}
-   timestamp_created > (
+  where timestamp_created > (
       SELECT COALESCE(DATE(MAX(timestamp_created)), DATE('1900-01-01')) 
       FROM {{ this }}
   )
