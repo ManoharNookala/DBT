@@ -4,16 +4,18 @@
             DELETE FROM {{source('staging', 'stg_Iris')}} WHERE TRUE;
 
             DELETE FROM {{source('landing', 'Iris')}}
-            WHERE order_id IN (
-              SELECT order_id FROM {{source('landing', 'Consent_Removal')}}
+            WHERE Id IN (
+              SELECT Id FROM {{source('landing', 'Consent_Removal')}}
             );
 
             DELETE FROM {{source('odp', 'odp_Iris')}}
-            WHERE order_id IN (
-              SELECT order_id FROM {{source('landing', 'Consent_Removal')}}
+            WHERE Id IN (
+              SELECT Id FROM {{source('landing', 'Consent_Removal')}}
             );"
   
 ) }}
+
+
 
 
 -- ,
