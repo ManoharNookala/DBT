@@ -5,7 +5,7 @@ DBT_odp:
       type: bigquery
       method: service-account 
       project: "{{ env_var('GCP_PROJECT_ID') }}"
-      dataset: odp  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
+      dataset: "{{ env_var('ODP_DATASET_NAME') }}"  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
       threads: 1  # ✅ Recommended: Increase threads for performance
       keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
 
@@ -16,6 +16,6 @@ DBT_staging:
       type: bigquery
       method: service-account 
       project: "{{ env_var('GCP_PROJECT_ID') }}"
-      dataset: staging  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
+      dataset: "{{ env_var('STAGING_DATASET_NAME') }}"  # ✅ Only "odp", ensuring dbt doesn't create unwanted datasets
       threads: 1  # ✅ Recommended: Increase threads for performance
       keyfile: "{{ env_var('GCP_CREDENTIALS') }}"
