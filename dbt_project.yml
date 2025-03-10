@@ -11,13 +11,3 @@ model-paths: ["models"]
 # macro-paths: ["macros"]
 # snapshot-paths: ["snapshots"]
 
-
-# models:
-#   DBT:
-#     staging:
-#       +schema: "{{ env_var('STAGING_DATASET_NAME', 'staging') }}"
-#     odp:
-#       +schema: "{{ env_var('ODP_DATASET_NAME', 'odp') }}"
-
-
-
