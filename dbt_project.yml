@@ -11,3 +11,19 @@ model-paths: ["models"]
 # macro-paths: ["macros"]
 # snapshot-paths: ["snapshots"]
 
+<<<<<<< HEAD
+=======
+# models:
+#   DBT:
+#     staging:
+#       +schema: staging
+#     odp:
+#       +schema: odp
+
+
+# vars:
+#   dataset_mapping:
+#     models/staging: staging
+#     models/odp: odp
+    
+>>>>>>> f57c515 (comments)
