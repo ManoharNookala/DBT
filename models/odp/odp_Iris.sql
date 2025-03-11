@@ -16,7 +16,7 @@ FROM {{ source('staging', 'stg_Iris') }}
   )
 {% endif %}
 
-{% endif %}
+
 
 {% else %}
     -- Skip execution if the profile is not 'DBT_staging'

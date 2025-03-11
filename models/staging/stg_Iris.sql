@@ -15,7 +15,6 @@ WHERE DATE(timestamp_created) > DATE_SUB('2025-03-06', INTERVAL 1 DAY)
   )
 {% endif %}
 
-{% endif %}
 
 {% else %}
     -- Skip execution if the profile is not 'DBT_staging'
