@@ -14,23 +14,11 @@ model-paths: ["models"]
 # snapshot-paths: ["snapshots"]
 
 
-
-# models:
-#   DBT:
-#     staging:
-#       +schema: staging
-#     odp:
-#       +schema: odp
-
-# vars:
-#   dataset_mapping:
-#     models/staging: staging
-#     models/odp: odp
-
-# models:
-#   DBT:
-#     staging:
-#       +schema: "{{ env_var('STAGING_DATASET_NAME') }}"  # ✅ Use existing dataset
-#     odp:
-#       +schema: "{{ env_var('ODP_DATASET_NAME') }}"  # ✅ Use existing dataset
-    
+models:
+  my_project:
+    staging:
+      +schema: staging
+      +alias: stg_Iris  # Optional, to explicitly control table names
+    odp:
+      +schema: odp
+      +alias: odp_Iris  # Optional, to explicitly control table names

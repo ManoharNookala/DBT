@@ -1,6 +1,5 @@
 {{ config(
-    materialized='incremental',
-    schema='staging'
+    materialized='incremental'
 ) }}
 
 SELECT DISTINCT *
