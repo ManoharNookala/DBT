@@ -1,20 +1,21 @@
 {{ config(
-  materialized='incremental',
-  pre_hook = "
-            DELETE FROM {{source('staging', 'stg_Iris')}} WHERE TRUE;
+  materialized='incremental'
 
-            DELETE FROM {{source('landing', 'Iris')}}
-            WHERE Id IN (
-              SELECT Id FROM {{source('landing', 'Consent_Removal')}}
-            );
-
-            DELETE FROM {{source('odp', 'odp_Iris')}}
-            WHERE Id IN (
-              SELECT Id FROM {{source('landing', 'Consent_Removal')}}
-            );"
   
 ) }}
 
+  -- pre_hook = "
+  --           DELETE FROM {{source('staging', 'stg_Iris')}} WHERE TRUE;
+
+  --           DELETE FROM {{source('landing', 'Iris')}}
+  --           WHERE Id IN (
+  --             SELECT Id FROM {{source('landing', 'Consent_Removal')}}
+  --           );
+
+  --           DELETE FROM {{source('odp', 'odp_Iris')}}
+  --           WHERE Id IN (
+  --             SELECT Id FROM {{source('landing', 'Consent_Removal')}}
+  --           );"
 -- ,
 --   post_hook="DELETE FROM {{source('staging', 'stg_Iris')}} WHERE TRUE"
 
