@@ -9,10 +9,5 @@ sources:
         description: "Raw Data"
       - name: Consent_Removal
         description: "All Consents"
-  - name: staging
-    database: "{{ env_var('GCP_PROJECT_ID') }}"  # Your GCP project ID
-    schema: staging  # ✅ Use schema as a string, not inside quotes unless needed
-    tables:
-      - name: stg_Iris
-        description: "Intermediate Tables"
+
 
