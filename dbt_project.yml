@@ -1,5 +1,20 @@
 
 
+name: 'DBT'
+version: '1.0.0'
+config-version: 2
+
+profile: "{{ env_var('DBT_PROFILE', 'DBT_odp') }}"  # ✅ Must match the profile name in profiles.yml
+
+model-paths: ["models"]
+# seed-paths: ["seeds"]
+# test-paths: ["tests"]
+# analysis-paths: ["analyses"]
+# macro-paths: ["macros"]
+# snapshot-paths: ["snapshots"]
+
+
+
 models:
   DBT:
     staging:
@@ -11,30 +26,4 @@ vars:
   dataset_mapping:
     models/staging: staging
     models/odp: odp
-
-# name: 'DBT'
-# version: '1.0.0'
-# config-version: 2
-
-# profile: "{{ env_var('DBT_PROFILE', 'DBT_odp') }}"  # ✅ Must match the profile name in profiles.yml
-
-# model-paths: ["models"]
-# seed-paths: ["seeds"]
-# test-paths: ["tests"]
-# analysis-paths: ["analyses"]
-# macro-paths: ["macros"]
-# snapshot-paths: ["snapshots"]
-
-# models:
-#   DBT:
-#     staging:
-#       +schema: staging
-#     odp:
-#       +schema: odp
-
-
-# vars:
-#   dataset_mapping:
-#     models/staging: staging
-#     models/odp: odp
     
