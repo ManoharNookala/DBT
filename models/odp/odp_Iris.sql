@@ -1,6 +1,6 @@
 {{ config(
     materialized='incremental',
-    post_hook = "drop table {{ source('odp', 'stg_Iris') }}"
+    enabled=(target.profile == 'DBT_odp')
 ) }}
 
 {% if target.profile == 'DBT_odp' %}
