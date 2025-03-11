@@ -14,13 +14,12 @@ model-paths: ["models"]
 # snapshot-paths: ["snapshots"]
 
 
-# models:
-#   DBT:
-#     staging:
-#       +schema: staging
-#       +materialized: incremental
-#       +enabled: true
-#     odp:
-#       +schema: odp
-#       +materialized: incremental
-#       +enabled: true
+models:
+  DBT:
+    staging:
+      +schema: staging
+      +enabled: "{{ target.profile == 'DBT_staging' }}"  # Enable only for DBT_staging
+    odp:
+      +schema: odp
+      +enabled: "{{ target.profile == 'DBT_odp' }}"  # Enable only for DBT_odp
+
