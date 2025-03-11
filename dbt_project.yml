@@ -4,7 +4,7 @@ name: 'DBT'
 version: '1.0.0'
 config-version: 2
 
-profile: "{{ env_var('DBT_PROFILE', 'DBT_odp') }}"  # ✅ Must match the profile name in profiles.yml
+profile: "{{ env_var('DBT_PROFILE', 'DBT_staging') }}"  # ✅ Must match the profile name in profiles.yml
 
 model-paths: ["models"]
 # seed-paths: ["seeds"]
@@ -26,4 +26,11 @@ model-paths: ["models"]
 #   dataset_mapping:
 #     models/staging: staging
 #     models/odp: odp
+
+models:
+  DBT:
+    staging:
+      +schema: "{{ env_var('STAGING_DATASET_NAME') }}"  # ✅ Use existing dataset
+    odp:
+      +schema: "{{ env_var('ODP_DATASET_NAME') }}"  # ✅ Use existing dataset
     
