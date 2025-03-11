@@ -32,7 +32,7 @@ jobs:
 
       # Running dbt for Staging Profile (Only Staging Models)
       - name: Run dbt Debug (Staging)
-        run: dbt debug --profiles-dir ./profile --target dev --profile DBT_staging
+        run: dbt debug --profiles-dir ./profile --target dev --profile DBT_staging --select staging.*
 
       - name: Run dbt Compile (Staging)
         run: dbt compile --profiles-dir ./profile --target dev --profile DBT_staging --select staging.*
@@ -42,7 +42,7 @@ jobs:
 
       # Running dbt for ODP Profile (Only ODP Models)
       - name: Run dbt Debug (ODP)
-        run: dbt debug --profiles-dir ./profile --target dev --profile DBT_odp
+        run: dbt debug --profiles-dir ./profile --target dev --profile DBT_odp --select odp.*
 
       - name: Run dbt Compile (ODP)
         run: dbt compile --profiles-dir ./profile --target dev --profile DBT_odp --select odp.*
