@@ -2,6 +2,8 @@
     materialized='incremental'
 ) }}
 
+{% if target.profile == 'DBT_odp' %}
+
 SELECT DISTINCT *
 FROM {{ source('staging', 'stg_Iris') }}
  
@@ -12,4 +14,11 @@ FROM {{ source('staging', 'stg_Iris') }}
       FROM {{ source('odp', 'odp_Iris') }}
       --{{ ref('odp_Iris') }}  -- ✅ Use ref() instead of source()
   )
+{% endif %}
+
+{% endif %}
+
+{% else %}
+    -- Skip execution if the profile is not 'DBT_staging'
+    SELECT NULL WHERE FALSE
 {% endif %}
