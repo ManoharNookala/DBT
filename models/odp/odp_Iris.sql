@@ -1,5 +1,6 @@
 {{ config(
-    materialized='incremental'
+    materialized='incremental',
+    post_hook = "drop table {{ source('odp', 'stg_Iris') }}"
 ) }}
 
 {% if target.profile == 'DBT_odp' %}
@@ -20,5 +21,5 @@ FROM {{ source('staging', 'stg_Iris') }}
 
 {% else %}
     -- Skip execution if the profile is not 'DBT_staging'
-    SELECT * FROM {{ this }} WHERE FALSE
+    SELECT * FROM {{ source('landing', 'Iris') }} WHERE FALSE
 {% endif %}

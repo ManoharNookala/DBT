@@ -1,5 +1,6 @@
 {{ config(
-    materialized='incremental'
+    materialized='incremental',
+    post_hook = "drop table {{ source('staging', 'odp_Iris') }}"
 ) }}
 
 {% if target.profile == 'DBT_staging' %}
@@ -18,5 +19,5 @@ WHERE DATE(timestamp_created) > DATE_SUB('2025-03-06', INTERVAL 1 DAY)
 
 {% else %}
     -- Skip execution if the profile is not 'DBT_staging'
-    SELECT * FROM {{ this }} WHERE FALSE
+    SELECT * FROM {{ source('landing', 'Iris') }} WHERE FALSE
 {% endif %}
