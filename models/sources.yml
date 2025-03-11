@@ -17,8 +17,7 @@ sources:
     tables:
       - name: stg_Iris
         description: "Raw Data"
-      - name: odp_Iris
-        description: "Unwanted Data"
+
 
   - name: odp
     database: "{{ env_var('GCP_PROJECT_ID') }}"
@@ -26,8 +25,7 @@ sources:
     tables:
       - name: odp_Iris
         description: "Processed ODP Data"
-      - name: stg_Iris
-        description: "Unwanted Data"
+
 
 
 
