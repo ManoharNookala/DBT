@@ -4,7 +4,7 @@
 
 SELECT DISTINCT *
 FROM {{ source('landing', 'Iris') }}
-WHERE DATE(timestamp_created) >= DATE_SUB('2024-03-06', INTERVAL 1 DAY)
+WHERE DATE(timestamp_created) > DATE_SUB('2025-03-06', INTERVAL 1 DAY)
 
 {% if is_incremental() %}
   AND timestamp_created > (
