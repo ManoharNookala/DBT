@@ -1,6 +1,5 @@
 {{ config(
     materialized='incremental'
-    --,enabled=(target.profile == 'DBT_staging')
 ) }}
 
 SELECT DISTINCT *
