@@ -15,15 +15,15 @@ model-paths: ["models"]
 
 
 
-models:
-  DBT:
-    staging:
-      +schema: staging
-    odp:
-      +schema: odp
+# models:
+#   DBT:
+#     staging:
+#       +schema: staging
+#     odp:
+#       +schema: odp
 
-vars:
-  dataset_mapping:
-    models/staging: staging
-    models/odp: odp
+# vars:
+#   dataset_mapping:
+#     models/staging: staging
+#     models/odp: odp
     
