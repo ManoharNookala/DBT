@@ -1,14 +1,7 @@
 version: 2
 
 sources:
-  - name: landing # Just a name
-    database: "{{ env_var('GCP_PROJECT_ID') }}"  # Your GCP project ID
-    schema: landing  # ✅ Use schema as a string, not inside quotes unless needed
-    tables:
-      - name: Iris
-        description: "Raw Data"
-      - name: Consent_Removal
-        description: "All Consents"
+
   - name: staging
     database: "{{ env_var('GCP_PROJECT_ID') }}"  # Your GCP project ID
     schema: staging  # ✅ Use schema as a string, not inside quotes unless needed
