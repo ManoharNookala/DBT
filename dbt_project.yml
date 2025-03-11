@@ -2,7 +2,7 @@ name: 'DBT'
 version: '1.0.0'
 config-version: 2
 
-profile: "{{ env_var('DBT_PROFILE', 'DBT_staging') }}"  # ✅ Must match the profile name in profiles.yml
+profile: "{{ env_var('DBT_PROFILE', 'DBT_odp') }}"  # ✅ Must match the profile name in profiles.yml
 
 model-paths: ["models"]
 # seed-paths: ["seeds"]
