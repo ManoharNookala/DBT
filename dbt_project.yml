@@ -15,10 +15,12 @@ model-paths: ["models"]
 
 
 models:
-  my_project:
+  DBT:
     staging:
       +schema: staging
-      +alias: stg_Iris  # Optional, to explicitly control table names
+      +materialized: incremental
+      +enabled: true
     odp:
       +schema: odp
-      +alias: odp_Iris  # Optional, to explicitly control table names
+      +materialized: incremental
+      +enabled: true
