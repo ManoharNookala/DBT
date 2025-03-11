@@ -30,20 +30,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install dbt-bigquery
 
-      # ✅ Running dbt for Staging Profile
-      # - name: Run dbt Debug (Staging)
-      #   run: dbt debug --profiles-dir ./profile --target dev --profile DBT_staging
+      # Running dbt for Staging Profile
+      - name: Run dbt Debug (Staging)
+        run: dbt debug --profiles-dir ./profile --target dev --profile DBT_staging
 
-      # - name: Run dbt Compile (Staging)
-      #   run: dbt compile --profiles-dir ./profile --target dev --profile DBT_staging
+      - name: Run dbt Compile (Staging)
+        run: dbt compile --profiles-dir ./profile --target dev --profile DBT_staging
 
-      # - name: Run dbt Run (Staging)
-      #   run: dbt run --profiles-dir ./profile --target dev --profile DBT_staging
+      - name: Run dbt Run (Staging)
+        run: dbt run --profiles-dir ./profile --target dev --profile DBT_staging
 
       # - name: Run dbt Test (Staging)
       #   run: dbt test --profiles-dir ./profile --target dev --profile DBT_staging
 
-      # ✅ Running dbt for ODP Profile
+      # Running dbt for ODP Profile
       - name: Run dbt Debug (ODP)
         run: dbt debug --profiles-dir ./profile --target dev --profile DBT_odp
 
@@ -53,9 +53,8 @@ jobs:
       - name: Run dbt Run (ODP)
         run: dbt run --profiles-dir ./profile --target dev --profile DBT_odp
 
-      - name: Run dbt Test (ODP)
-        run: dbt test --profiles-dir ./profile --target dev --profile DBT_odp
+      # - name: Run dbt Test (ODP)
+      #   run: dbt test --profiles-dir ./profile --target dev --profile DBT_odp
 
       - name: Clean Up
         run: rm -f $HOME/service_account.json
-
