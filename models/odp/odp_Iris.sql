@@ -1,6 +1,6 @@
 {{ config(
-    materialized='incremental',
-    enabled=(target.profile == 'DBT_odp')
+    materialized='incremental'
+    --,enabled=(target.profile == 'DBT_odp')
 ) }}
 
 SELECT DISTINCT *
