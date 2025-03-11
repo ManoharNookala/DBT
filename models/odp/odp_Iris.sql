@@ -20,5 +20,5 @@ FROM {{ source('staging', 'stg_Iris') }}
 
 {% else %}
     -- Skip execution if the profile is not 'DBT_staging'
-    SELECT * FROM UNNEST([]) AS empty_table
+    SELECT * FROM {{ this }} WHERE FALSE
 {% endif %}

@@ -18,5 +18,5 @@ WHERE DATE(timestamp_created) > DATE_SUB('2025-03-06', INTERVAL 1 DAY)
 
 {% else %}
     -- Skip execution if the profile is not 'DBT_staging'
-    SELECT * FROM UNNEST([]) AS empty_table
+    SELECT * FROM {{ this }} WHERE FALSE
 {% endif %}
